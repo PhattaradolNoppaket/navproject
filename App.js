@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View ,Button,TextInput} from 'react-native';
+import { Text, View, Button, TextInput } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+
 
 function HomeScreen({ navigation, route }) {
 
@@ -24,27 +26,29 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function CreatePostScreen({navigation,route}){
-  
-  const[postText,setPostText]= React.useState('');
+function CreatePostScreen({ navigation, route }) {
 
-  return(
+  const [postText, setPostText] = React.useState('');
+
+  return (
+    // use Fragment
     <>
-    <TextInput
-    multiline
-    placeholder='Please text here'
-    style ={{height:200,padding:10,backgroundColor:'white'}}
-    onChangeText={setPostText}
-    value={postText}
-    />
-    <Button
-    title = 'Click'
-    onPress = {()=>{
-      navigation.navigate('Home',{post:postText})
-    }}
-    />
-
+      <TextInput
+        multiline
+        placeholder='Plese text here'
+        style={{ height: 200, padding: 10, backgroundColor: 'grey' }}
+        onChangeText={setPostText}
+        value={postText}
+      />
+      <Button
+        title='Click'
+        onPress={() => {
+          //Pass params back to HomeScreen funchion
+          navigation.navigate('Home', { post: postText })
+        }}
+      />
     </>
+
   );
 }
 
@@ -53,18 +57,18 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator 
-      initialRouteName='Home'
-      screenOptions={{
-        headerStyle:{backgroundColor:'orange'},
-        headerTintColor: 'black',
-        headerTitleStyle:{fontWeight:'bold',fontSize:30}
-      }}
+      <Stack.Navigator
+        initialRouteName='Home'
+        screenOptions={{
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: '#ffff',
+          headerTitleStyle: { fontWeight: 'bold' }
+        }}
       >
-        <Stack.Screen name='Home' component={HomeScreen}/>
-        <Stack.Screen name='CreatePost' component={CreatePostScreen}/>
+        <Stack.Screen name='Home' component={HomeScreen} />
+        <Stack.Screen name='CreatePost' component={CreatePostScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+
   );
 }
-
