@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Ionicons name='home' size={30} color='green'/>
-            <Text>Home Screen</Text>
+            <Text>HomeScreen</Text>
             <Button
                 title='เกี่ยวกับเรา'
                 onPress={() => navigation.navigate('About', {
