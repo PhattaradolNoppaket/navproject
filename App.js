@@ -1,52 +1,69 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+import { Button, View, Text } from "react-native";
 import {
-  View,
-  Text,
-  StyleSheet,
-} from "react-native";
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import FirstPage from "./Pages/FirstPage";
-import SecondPage from "./Pages/SecondPage";
-import ThirdPage from "./Pages/ThirdPage";
 
-const Stack = createNativeStackNavigator();
-
-function App() {
+function Feed({ navigation }) {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="First Page"
-        screenOptions={{
-          headerStyle: { backgroundColor: "blue" },
-          headerTintColor: "#fff",
-          headerTitleStyle: { fontWeight: "bold", fontSize: 24 },
-        }}
-      >
-        <Stack.Screen name="First Page" component={FirstPage} />
-        <Stack.Screen name="Second Page" component={SecondPage} />
-        <Stack.Screen name="Third Page" component={ThirdPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      {/* <Button
+        onPress={() => navigation.navigate("Notifications")}
+        title="Go to notifications"
+      /> */}
+      <Text>Feed Screen</Text>
+    </View>
   );
 }
 
-export default App;
+function Article({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      {/* <Button onPress={() => navigation.goBack()} title="Go back home" /> */}
+      <Text>Article Screen</Text>
+    </View>
+  );
+}
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 20,
-  },
-  heading: {
-    fontSize: 25,
-    textAlign: "center",
-    marginVertical: 10,
-  },
-  textStyle: {
-    textAlign: "center",
-    fontSize: 16,
-    marginVertical: 10,
-  },
-});
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Help" onPress={() => alert("Link to help")} />
+    </DrawerContentScrollView>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      useLegacyImplementation
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      screenOptions = {
+        {
+          drawerStyle:{
+            backgroundColor:'red',
+            width:240
+          }
+        }
+      }
+    >
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Article" component={Article} />
+    </Drawer.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}
