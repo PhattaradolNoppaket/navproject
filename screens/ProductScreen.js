@@ -55,7 +55,7 @@ const ProductScreen = () => {
       <FlatList
       data = {product}
       keyExtrator = {(item,index)=>item.id.toString()}
-      ItemSeperatorComponent = {ItemSeparatorView}
+      ItemSeparatorComponent = {ItemSeparatorView}
       renderItem = {_renderItem}
       />
     </View>
